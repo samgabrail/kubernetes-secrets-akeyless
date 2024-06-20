@@ -76,7 +76,7 @@ data:
   .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJ...  # base64 encoded Docker config JSON
 ```
 
-## Creating and Managing Kubernetes Secrets
+## Creating and Managing Kubernetes Secrets (to demo)
 
 ### Creating Secrets Using kubectl
 
@@ -113,7 +113,7 @@ Apply the Secret using `kubectl`:
 kubectl apply -f my-secret.yaml
 ```
 
-With Kustomize, you can generate Secrets dynamically:
+With Kustomize, you can generate Secrets dynamically with a `kustomization.yaml` file:
 
 ```yaml
 secretGenerator:
@@ -214,6 +214,19 @@ Base64 encoding is often misunderstood as a form of encryption. In reality, it's
 echo 'YWRtaW4=' | base64 --decode  # Outputs 'admin'
 ```
 
+We can easily get the secret from the database, in our case we're using a k3s cluster with SQLlite
+
+```bash
+sqlite3 /var/lib/rancher/k3s/server/db/state.db
+```
+
+Then run the following SQL command:
+
+```sql
+SELECT name, hex(value) FROM kine WHERE name LIKE '%secrets%opaque-secret%';
+```
+
+Finally take that 
 ## Integrating Akeyless with Kubernetes Environments
 
 ### Akeyless Secrets Injector
