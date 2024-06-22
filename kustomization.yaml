@@ -1,5 +1,0 @@
-secretGenerator:
-- name: my-secret-using-kustomize
-  literals:
-  - username=admin
-  - password=s3cr3t

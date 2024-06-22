@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: opaque-secret
-type: Opaque
-data:
-  username: YWRtaW4=  # base64 encoded value of 'admin'
-  password: czNjcjN0  # base64 encoded value of 's3cr3t'

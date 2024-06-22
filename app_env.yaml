@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-secrets
+  template:
+    metadata:
+      labels:
+        app: hello-secrets
+      annotations:
+        akeyless/enabled: "true"
+        akeyless/side_car_enabled: "true"
+        akeyless/side_car_refresh_interval: "30s"
+    spec:
+      containers:
+      - name: alpine
+        image: alpine
+        command:
+          - "sh"
+          - "-c"
+          - "echo $MY_SECRET && echo going to sleep... && sleep 10000"
+        env:
+        - name: MY_SECRET
+          value: akeyless:/K8s/my_k8s_secret
