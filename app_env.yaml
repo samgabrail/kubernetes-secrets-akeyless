@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test
+  name: test-environment-variable
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
         command:
           - "sh"
           - "-c"
-          - "echo $MY_SECRET && echo going to sleep... && sleep 10000"
+          - "echo $MY_SECRET && echo ...going to sleep... && sleep 10000"
         env:
         - name: MY_SECRET
           value: akeyless:/K8s/my_k8s_secret

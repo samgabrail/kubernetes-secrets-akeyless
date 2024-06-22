@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-file
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-secrets-2
+  template:
+    metadata:
+      labels:
+        app: hello-secrets-2
+      annotations:
+        akeyless/enabled: "true"
+        akeyless/inject_file: "/K8s/my_k8s_secret"
+    spec:
+      containers:
+      - name: alpine
+        image: alpine
+        command:
+          - "sh"
+          - "-c"
+          - "cat /akeyless/secrets/K8s/my_k8s_secret && echo ...going to sleep... && sleep 2000"
