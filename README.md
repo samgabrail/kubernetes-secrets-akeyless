@@ -140,8 +140,6 @@ spec:
         app: hello-secrets
       annotations:
         akeyless/enabled: "true"
-        akeyless/side_car_enabled: "true"
-        akeyless/side_car_refresh_interval: "30s"
     spec:
       containers:
       - name: alpine
@@ -313,11 +311,12 @@ Output:
   "secret_value": "myPassword",
   "creation_date": 1719068280
 }
+```
 
 Now update the secret in the Akeyless UI:
 
 and notice the logs will automatically change to reflect the new secret:
-
+```json
 [
  {
   "version": 2,
@@ -325,12 +324,12 @@ and notice the logs will automatically change to reflect the new secret:
   "creation_date": 1719071019
  },
  {
-  "version": 31,
+  "version": 1,
   "secret_value": "myPassword",
   "creation_date": 1719068280
  }
 ]
-
+```
 Finally, we can exec into the alpine container to see the file where all the secrets live:
 
 ```bash
